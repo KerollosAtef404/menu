@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل دخول الكاشير</title>
+  <style>
+    body { background-color: #f0f2f5; font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .login-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+    .login-card h2 { color: #1b4332; margin-bottom: 20px; }
+    .input-group { margin-bottom: 15px; text-align: right; }
+    .input-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+    .input-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+    .btn-login { width: 100%; background-color: #1b4332; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+    .btn-login:hover { background-color: #2a9d8f; }
+    .error-msg { color: #d90429; margin-top: 10px; font-size: 0.9rem; }
+  </style>
+
+  <!-- مكتبات Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+<body>
+
+<div class="login-card">
+  <h2>تسجيل دخول الكاشير 🔐</h2>
+  <form id="login-form">
+    <div class="input-group">
+      <label>البريد الإلكتروني:</label>
+      <input type="email" id="email" required placeholder="أدخل البريد الإلكتروني">
+    </div>
+    <div class="input-group">
+      <label>كلمة السر:</label>
+      <input type="password" id="password" required placeholder="••••••••">
+    </div>
+    <button type="submit" class="btn-login">تسجيل الدخول</button>
+    <div id="error-msg" class="error-msg"></div>
+  </form>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDpgEqkiVE4W5iwZk29QDyxYmOS01xltDY",
+    authDomain: "deir-restaurant-db.firebaseapp.com",
+    databaseURL: "https://deir-restaurant-db-default-rtdb.firebaseio.com",
+    projectId: "deir-restaurant-db",
+    storageBucket: "deir-restaurant-db.firebasestorage.app",
+    messagingSenderId: "843725289967",
+    appId: "1:843725289967:web:3487430a998a16195e5e1a"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  // إذا كان الكاشير مسجلاً بالفعل، يتم توجيهه للوحة التحكم فوراً
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) window.location.href = "dashboard.html";
+  });
+
+  document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorDiv = document.getElementById('error-msg');
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        window.location.href = "dashboard.html";
+      })
+      .catch((err) => {
+        errorDiv.innerText = "بيانات الدخول غير صحيحة!";
+      });
+  });
+</script>
+
+</body>
+</html>
