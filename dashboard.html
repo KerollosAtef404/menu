@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم الكاشير - مطعم دير بياض</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- مكتبات Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <style>
+    body { background-color: #f0f2f5; font-family: system-ui, sans-serif; }
+    .dashboard-header { background: #1b4332; color: white; padding: 15px; text-align: center; }
+    
+    /* شريط اليوم والتاريخ والعدد */
+    .info-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2a9d8f;
+      color: white;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-bottom: 3px solid #e76f51;
+    }
+
+    /* أدوات البحث والتابات */
+    .controls-container { max-width: 900px; margin: 15px auto; padding: 0 10px; }
+    .search-box {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    .search-box:focus { border-color: #2a9d8f; }
+
+    .tabs-bar { display: flex; gap: 8px; border-bottom: 2px solid #ddd; }
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      background: #e9ecef;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+    .tab-btn.active { background: #1b4332; color: white; }
+
+    /* كروت الأوردرات */
+    .orders-grid { max-width: 900px; margin: 20px auto; padding: 0 10px; }
+    .order-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-top: 5px solid #ffb703;
+    }
+    .order-card.accepted { border-top-color: #2a9d8f; }
+    .order-card.rejected { border-top-color: #e63946; }
+
+    .card-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; }
+    .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-accepted { background: #d4edda; color: #155724; }
+    .status-rejected { background: #f8d7da; color: #721c24; }
+
+    .order-img { width: 100%; max-height: 250px; object-fit: contain; background: #000; border-radius: 8px; margin: 10px 0; }
+
+    .actions-bar { display: flex; gap: 10px; margin-top: 10px; }
+    .btn-accept { flex: 2; background: #2a9d8f; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    .btn-reject { flex: 2; background: #e63946; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    .btn-delete { flex: 0.5; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; }
+
+    /* تنسيق خاص بالطابعة الحرارية (80mm) */
+    @media print {
+      body * { visibility: hidden; }
+      #thermal-receipt, #thermal-receipt * { visibility: visible; }
+      #thermal-receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 80mm;
+        padding: 5mm;
+        font-family: 'Courier New', monospace;
+        color: #000;
+        background: #fff;
+      }
+      .receipt-header { text-align: center; border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px; }
+      .receipt-table { width: 100%; border-collapse: collapse; margin: 8px 0; text-align: right; }
+      .receipt-table th, .receipt-table td { font-size: 12px; padding: 3px 0; }
+      .receipt-total { border-top: 1px dashed #000; padding-top: 5px; text-align: left; font-size: 14px; font-weight: bold; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-header">
+    <h2>🧑‍🍳 لوحة تحكم الكاشير - متابعة الطلبات</h2>
+  </div>
+
+  <!-- شريط اسم اليوم والتاريخ والأعداد -->
+  <div class="info-bar">
+    <span id="header-date">📅 ...</span>
+    <span id="header-total-count">📊 إجمالي أوردرات اليوم: 0</span>
+  </div>
+
+  <div class="controls-container">
+    <!-- البحث برقم الأوردر -->
+    <input type="text" id="search-box" class="search-box" placeholder="🔍 ابحث برقم الأوردر (مثال: 2)..." onkeyup="applyFilters()">
+
+    <!-- التابات -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" id="tab-pending" onclick="switchTab('pending')">⏳ قيد المراجعة (<span id="cnt-pending">0</span>)</button>
+      <button class="tab-btn" id="tab-accepted" onclick="switchTab('accepted')">✅ المقبولة (<span id="cnt-accepted">0</span>)</button>
+      <button class="tab-btn" id="tab-rejected" onclick="switchTab('rejected')">❌ المرفوضة (<span id="cnt-rejected">0</span>)</button>
+    </div>
+  </div>
+
+  <!-- حاوية عرض الأوردرات -->
+  <div class="orders-grid" id="orders-container">
+    <p style="text-align: center; color: #666;">جاري تحميل الطلبات...</p>
+  </div>
+
+  <!-- الهيكل المخفي للطباعة الحرارية -->
+  <div id="thermal-receipt" style="display: none;"></div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

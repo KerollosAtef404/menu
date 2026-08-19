@@ -1,0 +1,241 @@
+/* إعادة ضبط الأساسيات ودعم اللغة العربية */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  direction: rtl;
+  padding-bottom: 50px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* 1. هيدر الترحيب */
+.main-header {
+  background: linear-gradient(135deg, #1b4332, #2d6a4f);
+  color: #ffffff;
+  text-align: center;
+  padding: 30px 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.main-header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* 2. أزرار الأقسام */
+.meal-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.nav-btn {
+  flex: 1;
+  background-color: #ffffff;
+  border: 2px solid #2d6a4f;
+  color: #2d6a4f;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background-color: #2d6a4f;
+  color: #ffffff;
+}
+
+.nav-btn small {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+/* 3. كروت الأصناف */
+.meal-section {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.meal-section h2 {
+  color: #1b4332;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.item-card {
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 15px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-card h3 {
+  font-size: 1.1rem;
+  color: #2b2b2b;
+}
+
+.item-card .price {
+  color: #d90429;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.qty-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.qty-box input {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.add-btn {
+  background-color: #40916c;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background-color: #1b4332;
+}
+
+/* 4. قسم السلة والدفع */
+.cart-box, .payment-box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.cart-box h2, .payment-box h2 {
+  color: #1b4332;
+  margin-bottom: 15px;
+}
+
+#cart-items-list {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+#cart-items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.checkout-btn, .confirm-btn {
+  width: 100%;
+  background-color: #2d6a4f;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.checkout-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.alert-info {
+  background-color: #e8f5e9;
+  border-right: 4px solid #2d6a4f;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.phone-num {
+  font-size: 1.3rem;
+  color: #d90429;
+  font-weight: bold;
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* رسالة حالة الطلب */
+.status-msg {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+}

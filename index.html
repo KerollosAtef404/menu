@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مطعم دير السيدة العذراء مريم بياض</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* تنسيق الهيدر لاستيعاب اللوجو يمين وشمال */
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      gap: 10px;
+    }
+
+    .header-text {
+      text-align: center;
+      flex: 1;
+    }
+
+    .header-logo {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
+      border-radius: 50%; /* لجعل اللوجو دائر ي لو أحببت، أو يمكنك إزالتها */
+    }
+
+    /* تنسيقات الشاشات الصغيرة (الموبايل) */
+    @media (max-width: 600px) {
+      .main-header {
+        padding: 10px;
+      }
+      .header-logo {
+        width: 45px;
+        height: 45px;
+      }
+      .header-text h1 {
+        font-size: 1.1rem;
+        margin: 0 0 5px 0;
+      }
+      .header-text p {
+        font-size: 0.75rem;
+        margin: 0;
+      }
+    }
+
+    /* تنسيقات مكملة للكانات الجديدة */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    textarea.form-control {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- هيدر الترحيب مع اللوجو يمين وشمال -->
+  <header class="main-header">
+    <!-- لوجو اليمين -->
+    <img src="images/2.jpg" alt="لوجو الدير" class="header-logo">
+
+    <!-- العنوان والنص -->
+    <div class="header-text">
+      <h1>أهلاً بكم في مطعم دير السيدة العذراء مريم بياض</h1>
+      <p>اختر القسم لرؤية أصناف الوجبات والطلب بسهولة</p>
+    </div>
+
+    <!-- لوجو الشمال -->
+    <img src="images/1.jpg" alt="لوجو المطعم" class="header-logo">
+  </header>
+
+  <main class="container">
+
+    <!-- 1. أزرار الأقسام -->
+    <section class="meal-nav">
+      <button class="nav-btn" onclick="switchMeal('breakfast')">🍳 الفطار <br><small>(8 ص - 11 ص)</small></button>
+      <button class="nav-btn" onclick="switchMeal('lunch')">🍗 الغداء <br><small>(12 ظ - 5 م)</small></button>
+      <button class="nav-btn" onclick="switchMeal('dinner')">🍕 العشاء <br><small>(6 م - 10 م)</small></button>
+     <button class="nav-btn" onclick="switchMeal('drinks')">🥤 المشروبات <br><small>(طوال اليوم)</small></button>
+    </section>
+
+    <!-- 2. أقسام الوجبات والأصناف -->
+    
+    <!-- قسم الفطار -->
+    <section id="breakfast" class="meal-section" style="display: none;">
+      <h2>🍳 قائمة الفطار</h2>
+      <div class="items-grid">
+
+  <!-- 1 -->
+  <div class="item-card">
+    <h3>طبق فول بالزيت والتوابل</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b1" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق فول بالزيت والتوابل', 15, 'qty-b1')">إضافة للسلة</button>
+  </div>
+
+  <!-- 2 -->
+  <div class="item-card">
+    <h3>طعمية سخنة (3 قرص)</h3>
+    <p class="price">10 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b2" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طعمية سخنة (3 قرص)', 10, 'qty-b2')">إضافة للسلة</button>
+  </div>
+
+  <!-- 3 -->
+  <div class="item-card">
+    <h3>طبق بيض مسلوق (2 حبة)</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b3" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بيض مسلوق (2 حبة)', 15, 'qty-b3')">إضافة للسلة</button>
+  </div>
+
+  <!-- 4 -->
+  <div class="item-card">
+    <h3>طبق بيض أومليت بالسمنة البلدي</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b4" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بيض أومليت بالسمنة البلدي', 25, 'qty-b4')">إضافة للسلة</button>
+  </div>
+
+  <!-- 5 -->
+  <div class="item-card">
+    <h3>علبة جبنة بيضاء بالخيار والطماطم</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b5" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('علبة جبنة بيضاء بالخيار والطماطم', 20, 'qty-b5')">إضافة للسلة</button>
+  </div>
+
+  <!-- 6 -->
+  <div class="item-card">
+    <h3>طبق جبنة قديمة بالمش والطماطم</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b6" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق جبنة قديمة بالمش والطماطم', 20, 'qty-b6')">إضافة للسلة</button>
+  </div>
+
+  <!-- 7 -->
+  <div class="item-card">
+    <h3>طبق بطاطس مقلية صوابع</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b7" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بطاطس مقلية صوابع', 20, 'qty-b7')">إضافة للسلة</button>
+  </div>
+
+  <!-- 8 -->
+  <div class="item-card">
+    <h3>طبق بطاطس مهروسة بالكمون وزيت الزيتون</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b8" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بطاطس مهروسة بالكمون وزيت الزيتون', 20, 'qty-b8')">إضافة للسلة</button>
+  </div>
+
+  <!-- 9 -->
+  <div class="item-card">
+    <h3>طبق باذنجان مقلي بالدقة والثوم</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b9" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق باذنجان مقلي بالدقة والثوم', 15, 'qty-b9')">إضافة للسلة</button>
+  </div>
+
+  <!-- 10 -->
+  <div class="item-card">
+    <h3>طبق بابا غنوج بالطحينة</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b10" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بابا غنوج بالطحينة', 20, 'qty-b10')">إضافة للسلة</button>
+  </div>
+
+  <!-- 11 -->
+  <div class="item-card">
+    <h3>طبق مسقعة صيامى خفيفة</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b11" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق مسقعة صيامى خفيفة', 25, 'qty-b11')">إضافة للسلة</button>
+  </div>
+
+  <!-- 12 -->
+  <div class="item-card">
+    <h3>طبق عجة بيض بالخضار والنعناع</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b12" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق عجة بيض بالخضار والنعناع', 25, 'qty-b12')">إضافة للسلة</button>
+  </div>
+
+  <!-- 13 -->
+  <div class="item-card">
+    <h3>طبق حلاوة طحينية بالسمنة/القشطة</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b13" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق حلاوة طحينية بالسمنة/القشطة', 25, 'qty-b13')">إضافة للسلة</button>
+  </div>
+
+  <!-- 14 -->
+  <div class="item-card">
+    <h3>طبق مربى فراولة / تين + قشطة</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b14" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق مربى فراولة / تين + قشطة', 30, 'qty-b14')">إضافة للسلة</button>
+  </div>
+
+  <!-- 15 -->
+  <div class="item-card">
+    <h3>طبق عسل أبيض + طحينة أو قشطة</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b15" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق عسل أبيض + طحينة أو قشطة', 30, 'qty-b15')">إضافة للسلة</button>
+  </div>
+
+  <!-- 16 -->
+  <div class="item-card">
+    <h3>فطيرة مشلتتة صغيرة</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b16" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('فطيرة مشلتتة صغيرة', 35, 'qty-b16')">إضافة للسلة</button>
+  </div>
+
+  <!-- 17 -->
+  <div class="item-card">
+    <h3>سندوتش جبنة رومي بلدي</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b17" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش جبنة رومي بلدي', 20, 'qty-b17')">إضافة للسلة</button>
+  </div>
+
+  <!-- 18 -->
+  <div class="item-card">
+    <h3>سندوتش كيري بالزيتون</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b18" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش كيري بالزيتون', 20, 'qty-b18')">إضافة للسلة</button>
+  </div>
+
+  <!-- 19 -->
+  <div class="item-card">
+    <h3>كوب شاي بلدي / شاي بالحليب</h3>
+    <p class="price">10 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b19" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('كوب شاي بلدي / شاي بالحليب', 10, 'qty-b19')">إضافة للسلة</button>
+  </div>
+
+  <!-- 20 -->
+  <div class="item-card">
+    <h3>كوب نسكافيه / قهوة بلبن</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-b20" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('كوب نسكافيه / قهوة بلبن', 15, 'qty-b20')">إضافة للسلة</button>
+  </div>
+
+</div>
+    </section>
+
+    <!-- قسم الغداء -->
+    <section id="lunch" class="meal-section" style="display: none;">
+      <h2>🍗 قائمة الغداء</h2>
+    
+
+      <div class="items-grid">
+
+  <!-- 1 -->
+  <div class="item-card">
+    <h3>وجبة خضار مشكل + أرز بشعرية</h3>
+    <p class="price">45 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l1" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة خضار مشكل + أرز بشعرية', 45, 'qty-l1')">إضافة للسلة</button>
+  </div>
+
+  <!-- 2 -->
+  <div class="item-card">
+    <h3>وجبة ربع فرخة مشوية + أرز + سلطة</h3>
+    <p class="price">85 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l2" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة ربع فرخة مشوية + أرز + سلطة', 85, 'qty-l2')">إضافة للسلة</button>
+  </div>
+
+  <!-- 3 -->
+  <div class="item-card">
+    <h3>وجبة نصف فرخة محمرة + أرز + ملوخية</h3>
+    <p class="price">150 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l3" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة نصف فرخة محمرة + أرز + ملوخية', 150, 'qty-l3')">إضافة للسلة</button>
+  </div>
+
+  <!-- 4 -->
+  <div class="item-card">
+    <h3>وجبة كفتة حاتي + أرز بسمتي + طحينة</h3>
+    <p class="price">120 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l4" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة كفتة حاتي + أرز بسمتي + طحينة', 120, 'qty-l4')">إضافة للسلة</button>
+  </div>
+
+  <!-- 5 -->
+  <div class="item-card">
+    <h3>وجبة شيش طاووق + بطاطس + ثومية</h3>
+    <p class="price">110 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l5" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة شيش طاووق + بطاطس + ثومية', 110, 'qty-l5')">إضافة للسلة</button>
+  </div>
+
+  <!-- 6 -->
+  <div class="item-card">
+    <h3>وجبة شرائح لحم بقرى + أرز + خضار سوتيه</h3>
+    <p class="price">160 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l6" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة شرائح لحم بقرى + أرز + خضار سوتيه', 160, 'qty-l6')">إضافة للسلة</button>
+  </div>
+
+  <!-- 7 -->
+  <div class="item-card">
+    <h3>طاجن بامية باللحمة + أرز</h3>
+    <p class="price">140 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l7" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن بامية باللحمة + أرز', 140, 'qty-l7')">إضافة للسلة</button>
+  </div>
+
+  <!-- 8 -->
+  <div class="item-card">
+    <h3>طاجن مسقعة باللحمة المفرومة + أرز</h3>
+    <p class="price">90 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l8" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن مسقعة باللحمة المفرومة + أرز', 90, 'qty-l8')">إضافة للسلة</button>
+  </div>
+
+  <!-- 9 -->
+  <div class="item-card">
+    <h3>وجبة سمك بلطي مقلي + أرز صيادية + سلطة</h3>
+    <p class="price">95 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l9" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة سمك بلطي مقلي + أرز صيادية + سلطة', 95, 'qty-l9')">إضافة للسلة</button>
+  </div>
+
+  <!-- 10 -->
+  <div class="item-card">
+    <h3>وجبة سمك بوري سنجاري + أرز وسلطة</h3>
+    <p class="price">135 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l10" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة سمك بوري سنجاري + أرز وسلطة', 135, 'qty-l10')">إضافة للسلة</button>
+  </div>
+
+  <!-- 11 -->
+  <div class="item-card">
+    <h3>وجبة جمبري مقلي + أرز وسلطة طحينة</h3>
+    <p class="price">170 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l11" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة جمبري مقلي + أرز وسلطة طحينة', 170, 'qty-l11')">إضافة للسلة</button>
+  </div>
+
+  <!-- 12 -->
+  <div class="item-card">
+    <h3>صينية مكرونة بشاميل باللحمة</h3>
+    <p class="price">65 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l12" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('صينية مكرونة بشاميل باللحمة', 65, 'qty-l12')">إضافة للسلة</button>
+  </div>
+
+  <!-- 13 -->
+  <div class="item-card">
+    <h3>طاجن تورلي خضار بالفرن (صيامى) + أرز</h3>
+    <p class="price">40 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l13" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن تورلي خضار بالفرن (صيامى) + أرز', 40, 'qty-l13')">إضافة للسلة</button>
+  </div>
+
+  <!-- 14 -->
+  <div class="item-card">
+    <h3>طبق كشري إكس لارج + تقلية وصلصة</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l14" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق كشري إكس لارج + تقلية وصلصة', 35, 'qty-l14')">إضافة للسلة</button>
+  </div>
+
+  <!-- 15 -->
+  <div class="item-card">
+    <h3>وجبة بانيه دجاج + مكرونة بالصلصة</h3>
+    <p class="price">90 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l15" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة بانيه دجاج + مكرونة بالصلصة', 90, 'qty-l15')">إضافة للسلة</button>
+  </div>
+
+  <!-- 16 -->
+  <div class="item-card">
+    <h3>طبق محشي مشكل (كرنب، ورق عنب، كوسة)</h3>
+    <p class="price">60 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l16" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق محشي مشكل (كرنب، ورق عنب، كوسة)', 60, 'qty-l16')">إضافة للسلة</button>
+  </div>
+
+  <!-- 17 -->
+  <div class="item-card">
+    <h3>طاجن مكرونة بالسجق البلدي</h3>
+    <p class="price">75 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l17" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن مكرونة بالسجق البلدي', 75, 'qty-l17')">إضافة للسلة</button>
+  </div>
+
+  <!-- 18 -->
+  <div class="item-card">
+    <h3>وجبة حواوشي بلدي (2 رغيف) + مخلل</h3>
+    <p class="price">80 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l18" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة حواوشي بلدي (2 رغيف) + مخلل', 80, 'qty-l18')">إضافة للسلة</button>
+  </div>
+
+  <!-- 19 -->
+  <div class="item-card">
+    <h3>وجبة شاورما دجاج عربي + بطاطس وثومية</h3>
+    <p class="price">95 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l19" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('وجبة شاورما دجاج عربي + بطاطس وثومية', 95, 'qty-l19')">إضافة للسلة</button>
+  </div>
+
+  <!-- 20 -->
+  <div class="item-card">
+    <h3>طاجن ورق عنب بالكوارع</h3>
+    <p class="price">180 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-l20" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن ورق عنب بالكوارع', 180, 'qty-l20')">إضافة للسلة</button>
+  </div>
+
+</div>
+    </section>
+
+    <!-- قسم العشاء -->
+    <section id="dinner" class="meal-section" style="display: none;">
+      <h2>🍕 قائمة العشاء</h2>
+    
+ <div class="items-grid">
+
+  <!-- 1 -->
+  <div class="item-card">
+    <h3>طبق جبنة بيضاء بالنعناع وزيت الزيتون</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d1" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق جبنة بيضاء بالنعناع وزيت الزيتون', 25, 'qty-d1')">إضافة للسلة</button>
+  </div>
+
+  <!-- 2 -->
+  <div class="item-card">
+    <h3>طبق بيض أومليت بالخضار</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d2" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بيض أومليت بالخضار', 30, 'qty-d2')">إضافة للسلة</button>
+  </div>
+
+  <!-- 3 -->
+  <div class="item-card">
+    <h3>طبق شكشوكة بالبيض والطماطم</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d3" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق شكشوكة بالبيض والطماطم', 35, 'qty-d3')">إضافة للسلة</button>
+  </div>
+
+  <!-- 4 -->
+  <div class="item-card">
+    <h3>سندوتش جبنة رومي سايحة</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d4" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش جبنة رومي سايحة', 25, 'qty-d4')">إضافة للسلة</button>
+  </div>
+
+  <!-- 5 -->
+  <div class="item-card">
+    <h3>طبق جبنة قديمة بالطماطم والدُّقَّة</h3>
+    <p class="price">25 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d5" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق جبنة قديمة بالطماطم والدُّقَّة', 25, 'qty-d5')">إضافة للسلة</button>
+  </div>
+
+  <!-- 6 -->
+  <div class="item-card">
+    <h3>سندوتش حواوشي خضار صيامى</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d6" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش حواوشي خضار صيامى', 30, 'qty-d6')">إضافة للسلة</button>
+  </div>
+
+  <!-- 7 -->
+  <div class="item-card">
+    <h3>بيتزا مشكل أجبان (صغير)</h3>
+    <p class="price">65 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d7" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('بيتزا مشكل أجبان (صغير)', 65, 'qty-d7')">إضافة للسلة</button>
+  </div>
+
+  <!-- 8 -->
+  <div class="item-card">
+    <h3>بيتزا خضروات ومشروم صيامى</h3>
+    <p class="price">60 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d8" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('بيتزا خضروات ومشروم صيامى', 60, 'qty-d8')">إضافة للسلة</button>
+  </div>
+
+  <!-- 9 -->
+  <div class="item-card">
+    <h3>فطيرة مشلتت صغير + عسل أبيض</h3>
+    <p class="price">50 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d9" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('فطيرة مشلتت صغير + عسل أبيض', 50, 'qty-d9')">إضافة للسلة</button>
+  </div>
+
+  <!-- 10 -->
+  <div class="item-card">
+    <h3>فطيرة كيري بالزيتون</h3>
+    <p class="price">55 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d10" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('فطيرة كيري بالزيتون', 55, 'qty-d10')">إضافة للسلة</button>
+  </div>
+
+  <!-- 11 -->
+  <div class="item-card">
+    <h3>سندوتش بطاطس بوري بالثومية</h3>
+    <p class="price">20 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d11" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش بطاطس بوري بالثومية', 20, 'qty-d11')">إضافة للسلة</button>
+  </div>
+
+  <!-- 12 -->
+  <div class="item-card">
+    <h3>سندوتش حلومي مشوي بالطماطم</h3>
+    <p class="price">40 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d12" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش حلومي مشوي بالطماطم', 40, 'qty-d12')">إضافة للسلة</button>
+  </div>
+
+  <!-- 13 -->
+  <div class="item-card">
+    <h3>طاجن فول بالبيض في الفرن</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d13" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طاجن فول بالبيض في الفرن', 30, 'qty-d13')">إضافة للسلة</button>
+  </div>
+
+  <!-- 14 -->
+  <div class="item-card">
+    <h3>طبق بطاطس ويدجز بالبهارات</h3>
+    <p class="price">30 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d14" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق بطاطس ويدجز بالبهارات', 30, 'qty-d14')">إضافة للسلة</button>
+  </div>
+
+  <!-- 15 -->
+  <div class="item-card">
+    <h3>طبق مربى بالقشطة والعيش</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d15" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق مربى بالقشطة والعيش', 35, 'qty-d15')">إضافة للسلة</button>
+  </div>
+
+  <!-- 16 -->
+  <div class="item-card">
+    <h3>سندوتش كبدة إسكندراني</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d16" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش كبدة إسكندراني', 35, 'qty-d16')">إضافة للسلة</button>
+  </div>
+
+  <!-- 17 -->
+  <div class="item-card">
+    <h3>سندوتش بيض مسلوق بالسمنة البلدي</h3>
+    <p class="price">18 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d17" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('سندوتش بيض مسلوق بالسمنة البلدي', 18, 'qty-d17')">إضافة للسلة</button>
+  </div>
+
+  <!-- 18 -->
+  <div class="item-card">
+    <h3>طبق لانشون بالبيض والمشروم</h3>
+    <p class="price">35 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d18" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('طبق لانشون بالبيض والمشروم', 35, 'qty-d18')">إضافة للسلة</button>
+  </div>
+
+  <!-- 19 -->
+  <div class="item-card">
+    <h3>علبة زبادي بلدي بالعسل</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d19" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('علبة زبادي بلدي بالعسل', 15, 'qty-d19')">إضافة للسلة</button>
+  </div>
+
+  <!-- 20 -->
+  <div class="item-card">
+    <h3>كوب شاي بالنعناع / حليب ساخن</h3>
+    <p class="price">15 ج.م</p>
+    <div class="qty-box">
+      <label>الكمية:</label>
+      <input type="number" id="qty-d20" value="1" min="1">
+    </div>
+    <button class="add-btn" onclick="addToCart('كوب شاي بالنعناع / حليب ساخن', 15, 'qty-d20')">إضافة للسلة</button>
+  </div>
+
+</div>
+    </section>
+
+<!-- قسم المشروبات -->
+<section id="drinks" class="meal-section" style="display: none;">
+  <h2>🥤 قائمة المشروبات</h2>
+
+  <div class="items-grid">
+
+    <!-- 1 -->
+    <div class="item-card">
+      <h3>شاي بلدي كشري / فتلة</h3>
+      <p class="price">10 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr1" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('شاي بلدي كشري / فتلة', 10, 'qty-dr1')">إضافة للسلة</button>
+    </div>
+
+    <!-- 2 -->
+    <div class="item-card">
+      <h3>شاي بالنعناع الطازج</h3>
+      <p class="price">12 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr2" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('شاي بالنعناع الطازج', 12, 'qty-dr2')">إضافة للسلة</button>
+    </div>
+
+    <!-- 3 -->
+    <div class="item-card">
+      <h3>شاي بالحليب (شاي بلبن)</h3>
+      <p class="price">15 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr3" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('شاي بالحليب (شاي بلبن)', 15, 'qty-dr3')">إضافة للسلة</button>
+    </div>
+
+    <!-- 4 -->
+    <div class="item-card">
+      <h3>قهوة تركي مضبوط / سادة</h3>
+      <p class="price">15 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr4" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('قهوة تركي مضبوط / سادة', 15, 'qty-dr4')">إضافة للسلة</button>
+    </div>
+
+    <!-- 5 -->
+    <div class="item-card">
+      <h3>قهوة فرنساوي بالحليب</h3>
+      <p class="price">20 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr5" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('قهوة فرنساوي بالحليب', 20, 'qty-dr5')">إضافة للسلة</button>
+    </div>
+
+    <!-- 6 -->
+    <div class="item-card">
+      <h3>نسكافيه كلاسيك / بلاك</h3>
+      <p class="price">20 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr6" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('نسكافيه كلاسيك / بلاك', 20, 'qty-dr6')">إضافة للسلة</button>
+    </div>
+
+    <!-- 7 -->
+    <div class="item-card">
+      <h3>كابتشينو برغوة كلاسيك</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr7" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('كابتشينو برغوة كلاسيك', 25, 'qty-dr7')">إضافة للسلة</button>
+    </div>
+
+    <!-- 8 -->
+    <div class="item-card">
+      <h3>هوت شوكليت بالمكسرات</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr8" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('هوت شوكليت بالمكسرات', 25, 'qty-dr8')">إضافة للسلة</button>
+    </div>
+
+    <!-- 9 -->
+    <div class="item-card">
+      <h3>سحلب بلدي بالمكسرات والجوز</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr9" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('سحلب بلدي بالمكسرات والجوز', 25, 'qty-dr9')">إضافة للسلة</button>
+    </div>
+
+    <!-- 10 -->
+    <div class="item-card">
+      <h3>مشروب قرفة بالحليب والعسل</h3>
+      <p class="price">20 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr10" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('مشروب قرفة بالحليب والعسل', 20, 'qty-dr10')">إضافة للسلة</button>
+    </div>
+
+    <!-- 11 -->
+    <div class="item-card">
+      <h3>ينسون / أعشاب طبيعية ساخنة</h3>
+      <p class="price">12 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr11" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('ينسون / أعشاب طبيعية ساخنة', 12, 'qty-dr11')">إضافة للسلة</button>
+    </div>
+
+    <!-- 12 -->
+    <div class="item-card">
+      <h3>عصير برتقال طبيعي طازج</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr12" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('عصير برتقال طبيعي طازج', 25, 'qty-dr12')">إضافة للسلة</button>
+    </div>
+
+    <!-- 13 -->
+    <div class="item-card">
+      <h3>عصير مانجو طبيعي ثقيل</h3>
+      <p class="price">30 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr13" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('عصير مانجو طبيعي ثقيل', 30, 'qty-dr13')">إضافة للسلة</button>
+    </div>
+
+    <!-- 14 -->
+    <div class="item-card">
+      <h3>عصير جوافة بالحليب</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr14" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('عصير جوافة بالحليب', 25, 'qty-dr14')">إضافة للسلة</button>
+    </div>
+
+    <!-- 15 -->
+    <div class="item-card">
+      <h3>عصير فراولة طازج</h3>
+      <p class="price">25 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr15" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('عصير فراولة طازج', 25, 'qty-dr15')">إضافة للسلة</button>
+    </div>
+
+    <!-- 16 -->
+    <div class="item-card">
+      <h3>عصير ليمون بنعناع منعش</h3>
+      <p class="price">20 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr16" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('عصير ليمون بنعناع منعش', 20, 'qty-dr16')">إضافة للسلة</button>
+    </div>
+
+    <!-- 17 -->
+    <div class="item-card">
+      <h3>كوكتيل فواكه مشكل (طبق/كوب)</h3>
+      <p class="price">35 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr17" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('كوكتيل فواكه مشكل (طبق/كوب)', 35, 'qty-dr17')">إضافة للسلة</button>
+    </div>
+
+    <!-- 18 -->
+    <div class="item-card">
+      <h3>ميلك شيك شوكولاتة / فانيليا</h3>
+      <p class="price">35 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr18" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('ميلك شيك شوكولاتة / فانيليا', 35, 'qty-dr18')">إضافة للسلة</button>
+    </div>
+
+    <!-- 19 -->
+    <div class="item-card">
+      <h3>مشروب غازي (كانز جميع الأنواع)</h3>
+      <p class="price">15 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr19" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('مشروب غازي (كانز جميع الأنواع)', 15, 'qty-dr19')">إضافة للسلة</button>
+    </div>
+
+    <!-- 20 -->
+    <div class="item-card">
+      <h3>زجاجة مياه معدنية (كبيرة / صغيرة)</h3>
+      <p class="price">10 ج.م</p>
+      <div class="qty-box">
+        <label>الكمية:</label>
+        <input type="number" id="qty-dr20" value="1" min="1">
+      </div>
+      <button class="add-btn" onclick="addToCart('زجاجة مياه معدنية (كبيرة / صغيرة)', 10, 'qty-dr20')">إضافة للسلة</button>
+    </div>
+
+  </div>
+</section>
+
+    <!-- 3. ملخص السلة -->
+    <section class="cart-box">
+      <h2>🛒 سلة الطلبات</h2>
+      <ul id="cart-items-list">
+        <li class="empty-msg">السلة فارغة حالياً</li>
+      </ul>
+      <div class="cart-total">
+        <span>الإجمالي النهائي:</span>
+        <strong id="cart-total-price">0 ج.م</strong>
+      </div>
+
+      <!-- 📝 خانة الملاحظات (فوق زر الانتقال للدفع) -->
+      <div class="form-group" style="margin-top: 15px;">
+        <label for="order-notes-input">📝 ملاحظات على الأوردر (اختياري):</label>
+        <textarea id="order-notes-input" class="form-control" placeholder="مثال: بدون بصل / زيادة طحينة / تسخين..." rows="2"></textarea>
+      </div>
+
+      <button id="checkout-btn" class="checkout-btn" onclick="goToPayment()" disabled>الانتقال إلى الدفع ➔</button>
+    </section>
+
+    <!-- 4. قسم الدفع ورفع السكرين شوت -->
+    <section id="payment-section" class="payment-box" style="display: none;">
+      <h2>💳 إتمام عملية الدفع</h2>
+      
+      <div class="alert-info">
+        ⚠️ <strong>يرجى الدفع أولاً:</strong> حوّل المبلغ عبر <strong>InstaPay</strong> أو <strong>المحفظة الإلكترونية</strong> على الرقم: <br>
+        <span class="phone-num">01000000000</span> <br>
+        ثم ارفع صورة إيصال التحويل (Screenshot) للـتأكيد.
+      </div>
+
+      <form id="payment-form">
+        <!-- رقم الأوردر المقفول ديناميكياً -->
+        <div class="form-group">
+          <label for="order-id-display">رقم الأوردر (غير قابل للتعديل):</label>
+          <input type="text" id="order-id-display" class="form-control" readonly>
+        </div>
+
+        <!-- 📞 خانة رقم الهاتف (فوق إرفاق الصورة) -->
+        <div class="form-group">
+          <label for="phone-input">📞 رقم الهاتف (للتواصل عند الاستلام):</label>
+          <input type="tel" id="phone-input" class="form-control" placeholder="01xxxxxxxx" required>
+        </div>
+
+        <!-- مكان رفع السكرين شوت -->
+        <div class="form-group">
+          <label for="screenshot-input">إرفاق صورة السكرين شوت (Screenshot):</label>
+          <input type="file" id="screenshot-input" accept="image/*" class="form-control" required>
+        </div>
+
+        <button type="button" class="confirm-btn" onclick="submitOrder()">تأكيد الدفع وإرسال الطلب 🚀</button>
+      </form>
+
+      <!-- حالة الطلب بعد الإرسال -->
+      <div id="order-status-msg" class="status-msg" style="display: none;"></div>
+    </section>
+
+  </main>
+
+  <!-- روابط مكتبات Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <!-- ملف الكود البرمجي -->
+  <script src="js/app.js"></script>
+</body>
+</html>

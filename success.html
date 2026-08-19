@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تم تأكيد الطلب - مطعم دير بياض</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: #f4f7f6;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .ticket-container {
+      max-width: 450px;
+      margin: 30px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 25px;
+      text-align: center;
+      border: 2px dashed #2a9d8f;
+    }
+    .success-icon {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+    .alert-warning-box {
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      border-right: 5px solid #ffb703;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin: 20px 0;
+      text-align: right;
+      line-height: 1.6;
+    }
+    .order-code-badge {
+      background: #1b4332;
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 15px;
+      border-radius: 12px;
+      margin: 15px 0;
+      display: block;
+      box-shadow: 0 4px 10px rgba(27, 67, 50, 0.2);
+    }
+    .order-details-table {
+      width: 100%;
+      margin: 20px 0;
+      border-collapse: collapse;
+      text-align: right;
+    }
+    .order-details-table td, .order-details-table th {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .btn-home {
+      display: inline-block;
+      width: 100%;
+      background: #2a9d8f;
+      color: white;
+      text-decoration: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <div class="ticket-container">
+      <div class="success-icon">🎉</div>
+      <h2 style="color: #2a9d8f; margin-bottom: 5px;">تم إرسال طلبك بنجاح!</h2>
+      <p style="color: #666; font-size: 0.9rem;">شكراً لطلبك من مطعم دير السيدة العذراء مريم بياض</p>
+
+      <!-- التنبيه الخاص بلقطة الشاشة -->
+      <div class="alert-warning-box">
+        📸 <strong>تنبيه هام جداً:</strong><br>
+        يرجى أخذ <strong>لقطة شاشة (Screenshot)</strong> لهذه الصفحة أو لرقم الكود لإبرازها للكاشير عند استلام الأوردر.
+      </div>
+
+      <!-- عرض كود الأوردر بشكل بارز -->
+      <label style="font-weight: bold; color: #333;">رقم الأوردر الخاص بك:</label>
+      <div id="order-id-tag" class="order-code-badge">جاري التحميل...</div>
+
+      <!-- تفاصيل ملخص الأوردر -->
+      <table class="order-details-table">
+        <tbody id="receipt-items">
+          <!-- سيتم تعبئتها بالجافاسكريبت -->
+        </tbody>
+      </table>
+
+      <a href="index.html" class="btn-home">طلب أوردر جديد 🍽️</a>
+    </div>
+  </main>
+
+  <script>
+    // قراءة بيانات الأوردر الأخير من localStorage
+    const lastOrderData = localStorage.getItem('lastOrder');
+
+    if (lastOrderData) {
+      const order = JSON.parse(lastOrderData);
+      document.getElementById('order-id-tag').innerText = order.orderId;
+
+      const itemsTable = document.getElementById('receipt-items');
+      let itemsHTML = '';
+
+      if (order.items && Array.isArray(order.items)) {
+        order.items.forEach(item => {
+          itemsHTML += `<tr>
+            <td>${item.name} (x${item.quantity})</td>
+            <td style="text-align: left; font-weight: bold;">${item.price * item.quantity} ج.م</td>
+          </tr>`;
+        });
+      }
+
+      itemsHTML += `<tr style="border-top: 2px solid #1b4332;">
+        <td style="font-weight: bold; padding-top: 12px;">الإجمالي النهائي:</td>
+        <td style="text-align: left; font-weight: bold; color: #d90429; font-size: 1.1rem; padding-top: 12px;">${order.totalAmount} ج.م</td>
+      </tr>`;
+
+      itemsTable.innerHTML = itemsHTML;
+    } else {
+      document.getElementById('order-id-tag').innerText = "ORD-0000";
+    }
+  </script>
+</body>
+</html>
