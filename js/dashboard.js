@@ -12,6 +12,17 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+// التأكد من تسجيل دخول الكاشير وحماية الصفحة
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // الكاشير مسجل دخول - ابدأ الاستماع للطلبات
+    listenToOrders();
+  } else {
+    // غير مسجل دخول - إعادة توجيه لصفحة اللوجين فوراً
+    window.location.href = "login.html";
+  }
+});
+
 let allOrders = {};
 let currentTab = 'pending';
 
@@ -233,6 +244,6 @@ function deleteOrder(key) {
   }
 }
 
+// التشغيل والتهيئة المبدئية
 updateHeaderInfo();
-listenToOrders();
 setInterval(autoCleanOrders, 5 * 60 * 1000);
